@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fastapi-book-project
+    env: docker
+    region: oregon
+    plan: free
+    dockerImage: emminex/fastapi-book-project:latest
+    envVars:
+      - key: PORT
+        value: 80
+    healthCheckPath: /healthcheck
+    autoDeploy: true
