@@ -14,6 +14,18 @@ def test_get_single_book():
     assert data["title"] == "The Hobbit"
     assert data["author"] == "J.R.R. Tolkien"
 
+def test_get_nonexistent_book():
+    """Test retrieving a non-existent book"""
+    response = client.get("/books/999")
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Book not found"}
+
+
+def test_get_book_invalid_id():
+    """Test retrieving a book with invalid ID format"""
+    response = client.get("/books/invalid")
+    assert response.status_code == 422
+
 
 def test_create_book():
     new_book = {
